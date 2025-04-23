@@ -54,7 +54,7 @@
             document.getElementById("message").innerText = "Mengirim data...";
             fetch('http://202.47.188.94:3411/smagerdigital/Presensi/Presensi_Harian/index.php', {
                 method: 'POST',
-                mode: 'cors',
+                mode: 'no-cors',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
