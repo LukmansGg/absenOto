@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Try Button Interactive</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            background: linear-gradient(45deg, #4CAF50, #8BC34A);
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: linear-gradient(45deg, #388E3C, #689F38);
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Tekan tombol untuk mencoba!</h2>
+        <button onclick="showMessage()">Try</button>
+        <p class="message" id="message"></p>
+    </div>
+
+    <script>
+        function showMessage() {
+            document.getElementById("message").innerText = "Anda telah menekan tombol Try!";
+            fetch('http://202.47.188.94:3411/smagerdigital/Presensi/Presensi_Harian/index.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams({
+                    tag_rfid: '0003949610',
+                    daftar: 'Kirim'
+                })
+            })
+            .then(response => response.text()) // Bisa juga `response.json()` jika server mengembalikan JSON
+            .then(data => console.log('Response dari server:', data))
+            .catch(error => console.error('Terjadi kesalahan:', error));
+        }
+    </script>
+
+</body>
+</html>
