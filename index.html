@@ -51,9 +51,10 @@
 
     <script>
         function showMessage() {
-            document.getElementById("message").innerText = "Anda telah menekan tombol Try!";
+            document.getElementById("message").innerText = "Mengirim data...";
             fetch('http://202.47.188.94:3411/smagerdigital/Presensi/Presensi_Harian/index.php', {
                 method: 'POST',
+                mode: 'cors',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
@@ -62,10 +63,15 @@
                     daftar: 'Kirim'
                 })
             })
-            .then(response => response.text()) // Bisa juga `response.json()` jika server mengembalikan JSON
-            .then(data => console.log('Response dari server:', data))
-            .catch(error => console.error('Terjadi kesalahan:', error));
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("message").innerText = "Berhasil: " + data;
+            })
+            .catch(error => {
+                document.getElementById("message").innerText = "Gagal: " + error;
+            });
         }
+
     </script>
 
 </body>
